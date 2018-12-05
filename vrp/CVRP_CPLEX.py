@@ -42,4 +42,18 @@ md1.add_indicator_constraints(md1.indicator_constraint(x[i,j],u[i]+q[j]==u[j]) f
 md1.add_constraints(u[i]>=q[i] for i in N)
 
 solution = md1.solve(log_output=True)
-print(solution)
+#print(solution)
+
+
+active_arc ={a for a in A if x[a].solution_value>0.9}
+
+plt.scatter(loc_x[1:], loc_y[1:], c='b')
+for i in N:
+    plt.annotate('$q_%d=%d$' % (i, q[i]), (loc_x[i] + 2, loc_y[i]))
+for i,j in active_arc:
+    plt.plot([loc_x[i],loc_x[j]], [loc_y[i],loc_y[j]], c='g', alpha=0.3)
+plt.plot(loc_x[0], loc_y[0], c='r', marker='s')
+plt.axis('equal')
+#plt.show()
+
+print(solution.solve_status)
