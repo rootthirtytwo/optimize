@@ -28,11 +28,12 @@ x0 = [1,5,5,1]
 
 b = (1.0,5.0)
 
-bnd = (b,b,b,b)
-con1 = {'type': 'ineq', 'fun': constraint1}
-con2 = {'type': 'eq', 'fun': constraint2}
+
+bnds = (b,b,b,b) # bounds
+con1 = {'type': 'ineq', 'fun': constraint1} # constraints 1
+con2 = {'type': 'eq', 'fun': constraint2} # constraints 2
 cons = [con1, con2]
 
-sol = minimize(objective, x0,method='SLSQP', bounds=bnd, constraints=cons)
+sol = minimize(objective, x0,method='SLSQP', bounds=bnds, constraints=cons)
 
 print(sol)
